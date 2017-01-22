@@ -73,9 +73,8 @@ class Image(Resource):
 		results = self.cnn_predict(task, self.model)
 		#results = self.cnn_predict(task, Image.model)
 		print 'predicted'
-		#query = self.w2v_predict(results, w2v_model)
-		query = self.w2v_predict(results, self.w2v_model)
-		#query = self.w2v_predict(results, Image.w2v_model)
+		#query = self.w2v_predict(results, self.w2v_model)
+		query = self.w2v_math(results, self.w2v_model)
 		print 'predicted'
 		self.get_images(query)
 		print 'getted'
@@ -99,6 +98,8 @@ class Image(Resource):
 
 	def get_images(self, query):
 		image_type="Action"
+		print query
+		pdb.set_trace()
 		query= query.split()
 		query='+'.join(query)
 		url="https://www.google.co.in/search?q="+query+"&source=lnms&tbm=isch"
@@ -177,7 +178,7 @@ class Image(Resource):
 	def w2v_math(self, words,w2v_model):
 		print words
 		pdb.set_trace()
-                answer = w2v_model.most_similar(positive=[words[0], words[1]], negative=[words[2]])
+                answer = w2v_model.most_similar(positive=[words[0], words[1]], negative=[words[2]])[0][0]
                 return answer
 
 
