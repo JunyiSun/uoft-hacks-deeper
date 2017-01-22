@@ -4,6 +4,7 @@ import imagenet_classification
 import sys
 import os
 import datetime
+import simplejson as json
 import pdb
 #-----
 from keras.applications.inception_v3 import InceptionV3
@@ -23,7 +24,6 @@ import re
 import urllib2
 import os
 import cookielib
-import json
 import logging
 import datetime
 import shutil
@@ -68,13 +68,20 @@ class Image(Resource):
 
 	def put(self, todo_id):
 		useless = {'task': 'results.jpg'}
+
 		print "BeforeParseArgs"
 		args = parser.parse_args()
 		task = args['task']
 		print task
-		self.get_captions(task)
-		#results = self.cnn_predict(task, model)
+		captions = self.get_captions(task)
+		print captions
+		#output = {'image1': captions[0], 'image2': captions[1], 'image3': captions[2]}
+		#jsonOutput = json.dumps(output)
+		#print jsonOutput
+		listOutput = [captions[0], captions[1], captions[2]]
+		#return listOutput
 		results = self.cnn_predict(task, self.model)
+		#results = self.cnn_predict(task, model)
 		#results = self.cnn_predict(task, Image.model)
 		print 'predicted'
 		query = self.w2v_predict(results, self.w2v_model)
@@ -83,7 +90,8 @@ class Image(Resource):
 		self.get_images(query)
 		print 'getted'
 		IMAGES[todo_id] = query
-		return useless, 201
+		return listOutput
+		#return output, 201
 
 	def get_captions(self,folder):
 		p = subprocess.Popen(["th", "/Users/joeybose/Desktop/hackathon/neuraltalk2/eval.lua", "-model", 
@@ -99,8 +107,8 @@ class Image(Resource):
 					result = caption[1].strip('\t')
 					captions.append(result)
 			except:
-				print("Error")
-		print  captions
+				haha = 0
+		return captions
 
 	def get_soup(self, url,header):
 	    return BeautifulSoup(urllib2.urlopen(urllib2.Request(url,headers=header)),'html.parser')
@@ -120,7 +128,6 @@ class Image(Resource):
 	def get_images(self, query):
 		image_type="Action"
 		print query
-		pdb.set_trace()
 		query= query.split()
 		query='+'.join(query)
 		url="https://www.google.co.in/search?q="+query+"&source=lnms&tbm=isch"
@@ -198,7 +205,6 @@ class Image(Resource):
 
 	def w2v_math(self, words,w2v_model):
 		print words
-		pdb.set_trace()
                 answer = w2v_model.most_similar(positive=[words[0], words[1]], negative=[words[2]])[0][0]
                 return answer
 
@@ -225,13 +231,11 @@ if __name__ == '__main__':
 	print 'begin loading 2nd model'
 	my_w2v_model = Word2Vec.load("wiki_model/wiki.en.word2vec.model")
 	print 'end loading models'
-
 	api.add_resource(ImageList, '/images')
 	#api.add_resource(Image, '/images/<todo_id>')
 	print 'Adding model resources'
 	api.add_resource(Image, '/images/<todo_id>', resource_class_kwargs={'model': my_model, 'w2v_model':my_w2v_model})
 	api.add_resource(Home, '/')
-
 	print "before run app"	
 	app.run(debug=False)
 	print "after run app"

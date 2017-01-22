@@ -1,0 +1,44 @@
+doctype html
+html
+	head
+		link(href="./css/bootstrap.min.css",rel="stylesheet")
+		link(href="/css/vex.css",rel="stylesheet")
+		script(src="./libs/jquery.min.js")
+		script(src="./libs/bootstrap.min.js")
+		script(src='./libs/angular.min.js')
+
+
+	body
+		.container
+			.row
+				.col-md-2
+					if pic1
+						h1  #{name1}
+						#core
+							img(id= 'image1', src='./uploads/#{source1}', alt='#{name1}', style='position:relative;width:180px;height:200px;')
+					else
+						img(src='./default/default.jpg', alt='Default Picture', style='width:200px;height:200px;')
+				.col-md-1
+					h1 +
+				.col-md-2
+					if pic2
+						h1  #{name2}
+						#core
+							img(id= 'image2', src='./uploads/#{source2}', alt='#{name2}', style='position:relative;width:180px;height:200px;')
+					else
+						img(src='./default/default.jpg', alt='Default Picture', style='width:200px;height:200px;')
+				.col-md-1			
+					h1 -
+				.col-md-2
+					if pic3
+						h1  #{name3}
+						#core
+							img(id= 'image3', src='./uploads/#{source3}', alt='#{name3}', style='position:relative;width:180px;height:200px;')
+					else    
+						img(src='./default/default.jpg', alt='Default Picture', style='width:200px;height:200px;') 
+				.col-md-1
+					h1 =
+				.col-md-2
+					#core
+					img(id= 'result', src='./results/result.jpg', alt='#{result}', style='position:relative;width:180px;height:200px;')
+					h3  Result Picture 

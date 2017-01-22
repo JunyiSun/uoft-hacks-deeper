@@ -18,6 +18,9 @@ globalFileName1 = ""
 globalFileName2 = ""
 globalFileName3 = ""
 fieldTitle = ""
+caption1 = "AI caption1";
+caption2 = "AI caption2";
+caption3 = "AI caption3";
 
 app.get('/result', function(req, res) {
   res.render('resultpage', {
@@ -27,9 +30,28 @@ app.get('/result', function(req, res) {
     name: fieldTitle,
     source1: globalFileName1,
     source2: globalFileName2,
-    source3: globalFileName3
+    source3: globalFileName3,
+    cap1: caption1,
+    cap2: caption2,
+    cap3: caption3
   });
 });
+
+app.get('/try', function(req, res) {
+  res.render('try', {
+    pic1: true,
+    pic2: true,
+    pic3: true,
+    name: fieldTitle,
+    source1: globalFileName1,
+    source2: globalFileName2,
+    source3: globalFileName3,
+    cap1: caption1,
+    cap2: caption2,
+    cap3: caption3
+  });
+});
+
 app.post('/upload', function(req, res) {
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
@@ -118,6 +140,9 @@ function updateDir() {
     baba = baba.replace(/"/g, '')
     console.log(baba)
     after = baba.split(",")
+    caption1 = after[0]
+    caption2 = after[1]
+    caption3 = after[2]
     console.log(after) 
     open("http://localhost:8080/result")
   });
