@@ -1,0 +1,38 @@
+body {
+    padding-top: 0px;
+    padding-bottom: 40px;
+    color: #5a5a5a;
+}
+
+
+.carousel {
+    height: 500px;
+    margin-bottom: 60px;
+}
+
+.carousel .item {
+    height: 500px;
+    background-color: #000;
+}
+
+.carousel .item img {
+    width: 100%;
+    height:100%;
+}
+
+.carousel-caption {
+    z-index: 10;
+}
+
+.carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+@media (min-width: 992px) {
+    .feature-heading {
+margin-top: 5px;
+color: #4357FA;
+    }
+}
