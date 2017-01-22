@@ -15,10 +15,19 @@ app.set('view engine', 'jade'); //set templete
 app.post('/upload', function(req, res) {
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
+    if (files.upload1.name) {
+      var pic11 = true;
+    }
+    if (files.upload2.name) {
+      var pic22 = true;
+    }
+    if (files.upload3.name) {
+      var pic33 = true;
+    }
     res.render('uploadpage', {
-      pic1: true,
-      pic2: true,
-      pic3: true,
+      pic1: pic11,
+      pic2: pic22,
+      pic3: pic33,
       name: fields.title,
       source1: files.upload1.name,
       source2: files.upload2.name,
@@ -69,11 +78,11 @@ app.post('/upload', function(req, res) {
   });
 });
 
-function updateDir(){
+function updateDir() {
   var request = require('request');
 
   request({
-    uri: "http://localhost:5000/images/input?task="+"/upload",
+    uri: "http://localhost:5000/images/input?task=" + "/upload",
     method: "PUT",
     timeout: 10000,
     followRedirect: true,
