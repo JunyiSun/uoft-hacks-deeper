@@ -8,6 +8,7 @@
     "formidable": "^1.0.17",
     "fs-extra": "^0.26.5",
     "jade": "^1.11.0",
+    "open": "0.0.5",
     "quickthumb": "^0.0.12",
     "request": "^2.79.0"
   },

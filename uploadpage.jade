@@ -2,13 +2,60 @@ doctype html
 html
   head
     link(href="./css/bootstrap.min.css",rel="stylesheet")
+    link(href="/css/index.css",rel="stylesheet")
     script(src="./libs/jquery.min.js")
     script(src="./libs/bootstrap.min.js")
     script(src="./adjustment.js")
     script(src='./libs/angular.min.js')
     
-    
   body
+    #ad-carousel.carousel.slide(data-ride='carousel')
+      ol.carousel-indicators
+        li.active(data-target='#ad-carousel', data-slide-to='0')
+        li(data-target='#ad-carousel', data-slide-to='1')
+        li(data-target='#ad-carousel', data-slide-to='2')
+        li(data-target='#ad-carousel', data-slide-to='3')
+        li(data-target='#ad-carousel', data-slide-to='4')
+      .carousel-inner
+        .item.active
+          img(src='images/together.JPG', alt='1 slide')
+          .container
+            .carousel-caption
+              h1 UofT Hackathon IV
+              p
+                img#barcode(src='', alt='')
+        .item
+          img(src='images/02.jpg', alt='2 slide')
+          .container
+            .carousel-caption
+              h1 We are team Deeper
+              p
+                img#barcode(src='', alt='')
+        .item
+          img(src='images/04.jpg', alt='3 slide')
+          .container
+            .carousel-caption
+              h1 From UofT & UofW - Engineering & CS
+              p
+                img#barcode(src='', alt='')
+        .item
+          img(src='images/10.jpg', alt='4 slide')
+          .container
+            .carousel-caption
+              h1 Image Recognition
+              p
+                img#barcode(src='', alt='')
+        .item
+          img(src='images/12.jpg', alt='5 slide')
+          .container
+            .carousel-caption
+              h1 Machine Learning
+              p
+                img#barcode(src='', alt='')
+      a.left.carousel-control(href='#ad-carousel', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left
+      a.right.carousel-control(href='#ad-carousel', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right
     .container
       .row
         .col-md-3
@@ -18,7 +65,7 @@ html
               img(id= 'image1', src='./uploads/#{source1}', alt='#{name1}', style='position:relative;width:300px;height:300px;')
           else
             
-            img(src='./uploads/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
+            img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
         .col-md-3
           if pic2
             h1  #{name2}
@@ -26,7 +73,7 @@ html
               img(id= 'image2', src='./uploads/#{source2}', alt='#{name2}', style='position:relative;width:300px;height:300px;')
           else
             
-            img(src='./uploads/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
+            img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
         .col-md-3 
           if pic3
             h1  #{name3}
@@ -34,11 +81,9 @@ html
               img(id= 'image3', src='./uploads/#{source3}', alt='#{name3}', style='position:relative;width:300px;height:300px;')
           else
             
-            img(src='./uploads/default.jpg', alt='Default Picture', style='width:300px;height:300px;') 
+            img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;') 
       .row
         form(action='/upload', enctype='multipart/form-data', method='post')
-          | Add a title : 
-          input(name='title', type='text', placeholder='Image')
           br
           br
           input(multiple='multiple', name='upload1', type='file')
@@ -46,8 +91,4 @@ html
           input(multiple='multiple', name='upload3', type='file')
           br
           input(type='submit', value='Upload')
-      .row
-        h1  Result Picture 
-          #core
-          img(id= 'result', src='./results/result.jpg', alt='#{result}', style='position:relative;width:300px;height:300px;')
          

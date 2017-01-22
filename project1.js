@@ -19,15 +19,15 @@ globalFileName3 = ""
 fieldTitle = ""
 
 app.get('/result', function(req, res) {
-    res.render('uploadpage', {
-      pic1: true,
-      pic2: true,
-      pic3: true,
-      name: fieldTitle,
-      source1: globalFileName1,
-      source2: globalFileName2,
-      source3: globalFileName3
-    });
+  res.render('resultpage', {
+    pic1: true,
+    pic2: true,
+    pic3: true,
+    name: fieldTitle,
+    source1: globalFileName1,
+    source2: globalFileName2,
+    source3: globalFileName3
+  });
 });
 app.post('/upload', function(req, res) {
   var form = new formidable.IncomingForm();
@@ -35,24 +35,24 @@ app.post('/upload', function(req, res) {
     fieldTitle = fields.title
     if (files.upload1.name) {
       var pic11 = true;
-      globalFileName1 = files.upload1.name;
+      globalFileName1 = 'input1.jpg';
     }
     if (files.upload2.name) {
       var pic22 = true;
-      globalFileName2 = files.upload2.name;
+      globalFileName2 = 'input2.jpg';
     }
     if (files.upload3.name) {
       var pic33 = true;
-      globalFileName3 = files.upload3.name;
+      globalFileName3 = 'input3.jpg';
     }
     res.render('uploadpage', {
       pic1: pic11,
       pic2: pic22,
       pic3: pic33,
       name: fields.title,
-      source1: files.upload1.name,
-      source2: files.upload2.name,
-      source3: files.upload3.name
+      source1: globalFileName1,
+      source2: globalFileName2,
+      source3: globalFileName3
     }
     )
   });
@@ -63,9 +63,9 @@ app.post('/upload', function(req, res) {
     var temp_path1 = this.openedFiles[1].path;
     var temp_path2 = this.openedFiles[2].path;
     /* The file name of the uploaded file */
-    var file_name0 = this.openedFiles[0].name;
-    var file_name1 = this.openedFiles[1].name;
-    var file_name2 = this.openedFiles[2].name;
+    var file_name0 = 'input1.jpg';
+    var file_name1 = 'input2.jpg';
+    var file_name2 = 'input3.jpg';
     /* Location where we want to copy the uploaded file */
     var new_location = 'uploads/';
 
@@ -93,7 +93,7 @@ app.post('/upload', function(req, res) {
       }
     });
     updateDir();
-    // request object executes here.
+  // request object executes here.
   });
 });
 
@@ -111,7 +111,7 @@ function updateDir() {
     console.log("bla");
     open("http://localhost:8080/result")
   });
-  // request object executes at end of function 
+// request object executes at end of function
 }
 
 // Show the upload form
