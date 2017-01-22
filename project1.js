@@ -124,7 +124,7 @@ function updateDir() {
   var request = require('request');
   // create a request object
   request({
-    uri: "http://localhost:5000/images/input?task=" + "uploads",
+    uri: "http://localhost:5000/images/input?task=" + "uploads" + "&typee=2",
     method: "PUT",
     timeout: 3000000,
     followRedirect: true,
@@ -132,13 +132,9 @@ function updateDir() {
   }, function(error, response) {
     console.log('RESPONSE.BODY IS      .....:')
     baba = JSON.parse(JSON.stringify(response.body))
-    console.log(baba)
     baba = baba.replace('[', '')
-    console.log(baba)
     baba = baba.replace(']', '')
-    console.log(baba)
     baba = baba.replace(/"/g, '')
-    console.log(baba)
     after = baba.split(",")
     caption1 = after[0]
     caption2 = after[1]
