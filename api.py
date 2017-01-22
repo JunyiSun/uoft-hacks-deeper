@@ -78,20 +78,13 @@ class Image(Resource):
 		print task
 		typee = args['typee']
 		if int(float(typee))==2:
-			print 'In Captioning'
+			print 'In Outlier'
 			captions = self.get_captions(task)
 			print captions
-			#output = {'image1': captions[0], 'image2': captions[1], 'image3': captions[2]}
-			#jsonOutput = json.dumps(output)
-			#print jsonOutput
 			listOutput = [captions[0], captions[1], captions[2]]
-			#return listOutput
 			results = self.cnn_predict(task, self.model)
-			#results = self.cnn_predict(task, model)
-			#results = self.cnn_predict(task, Image.model)
 			print 'predicted'
 			query = self.w2v_predict(results, self.w2v_model)
-			#query = self.w2v_math(results, self.w2v_model)
 			print 'predicted'
 			self.get_images(query)
 			print 'getted'
@@ -99,17 +92,12 @@ class Image(Resource):
 			return listOutput
 		else:
 			print 'In Mathy'
-			#captions = self.get_captions(task)
-			#print captions
-			#output = {'image1': captions[0], 'image2': captions[1], 'image3': captions[2]}
-			#jsonOutput = json.dumps(output)
-			#print jsonOutput
-			listOutput = ['none','none','none']
-			#return listOutput
+			captions = self.get_captions(task)
+			print captions
+			listOutput = [captions[0], captions[1], captions[2]]
 			results = self.cnn_predict(task, self.model)
 			print 'predicted'
 			query = self.w2v_math(results, self.w2v_model)
-			print 'mathed'
 			self.get_images(query)
 			IMAGES[todo_id] = query
 			return listOutput
