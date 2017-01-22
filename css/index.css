@@ -1,20 +1,21 @@
 body {
     padding-top: 0px;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
     color: #5a5a5a;
     background-color: #74BCB0;
 }
 .custom {
-    width: 1100px;
+    width: 1150px;
 }
 
+
 .carousel {
-    height: 650px;
+    height: 600px;
     margin-bottom: 60px;
 }
 
 .carousel .item {
-    height: 650px;
+    height: 600px;
     background-color: #000;
 }
 

@@ -1,103 +1,149 @@
 doctype html
 html
-  head
-    link(href="./css/bootstrap.min.css",rel="stylesheet")
-    link(href="/css/index.css",rel="stylesheet")
-    script(src="./libs/jquery.min.js")
-    script(src="./libs/bootstrap.min.js")
-    script(src="./adjustment.js")
-    script(src='./libs/angular.min.js')
-    
-  body
-    #ad-carousel.carousel.slide(data-ride='carousel')
-      ol.carousel-indicators
-        li.active(data-target='#ad-carousel', data-slide-to='0')
-        li(data-target='#ad-carousel', data-slide-to='1')
-        li(data-target='#ad-carousel', data-slide-to='2')
-        li(data-target='#ad-carousel', data-slide-to='3')
-        li(data-target='#ad-carousel', data-slide-to='4')
-      .carousel-inner
-        .item.active
-          img(src='images/01.jpg', alt='1 slide')
-          .container
-            .carousel-caption
-              h1 UofT Hackathon IV
-              p
-                img#barcode(src='', alt='')
-        .item
-          img(src='images/02.jpg', alt='2 slide')
-          .container
-            .carousel-caption
-              h1 We are team Deeper
-              p
-                img#barcode(src='', alt='')
-        .item
-          img(src='images/03.jpg', alt='3 slide')
-          .container
-            .carousel-caption
-              h1 From UofT & UofW - Engineering & CS
-              p
-                img#barcode(src='', alt='')
-        .item
-          img(src='images/04.jpg', alt='4 slide')
-          .container
-            .carousel-caption
-              h1 Image Recognition
-              p
-                img#barcode(src='', alt='')
-        .item
-          img(src='images/05.jpg', alt='5 slide')
-          .container
-            .carousel-caption
-              h1 Machine Learning
-              p
-                img#barcode(src='', alt='')
-      a.left.carousel-control(href='#ad-carousel', data-slide='prev')
-        span.glyphicon.glyphicon-chevron-left
-      a.right.carousel-control(href='#ad-carousel', data-slide='next')
-        span.glyphicon.glyphicon-chevron-right
-    .container
-      .row
-        .col-md-4
-          if pic1
-            h1  #{name1}
-            #core
-              img(id= 'image1', src='./uploads/#{source1}', alt='#{name1}', style='position:relative;width:300px;height:300px;')
-          else
-            
-            img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
-        .col-md-4
-          if pic2
-            h1  #{name2}
-            #core
-              img(id= 'image2', src='./uploads/#{source2}', alt='#{name2}', style='position:relative;width:300px;height:300px;')
-          else
-            
-            img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
-        .col-md-4 
-          if pic3
-            h1  #{name3}
-            #core
-              img(id= 'image3', src='./uploads/#{source3}', alt='#{name3}', style='position:relative;width:300px;height:300px;')
-          else
-            
-            img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;') 
-      .row
-        form(action='/upload', enctype='multipart/form-data', method='post')
-          br
-          br
-          .col-md-4
-            .fileUpload.btn.btn-success
-              input(multiple='multiple', name='upload1', type='file')
-          .col-md-4
-            .fileUpload.btn.btn-success
-              input(multiple='multiple', name='upload2', type='file')
-          .col-md-4
-            .fileUpload.btn.btn-success
-              input(multiple='multiple', name='upload3', type='file')
-          br
-          br
-          br
-          button.btn.btn-primary(type="submit", class = 'custom') Upload
-          //- input(type='submit', value='Upload')
-         
+	head
+		link(href="./css/bootstrap.min.css",rel="stylesheet")
+		link(href="/css/index.css",rel="stylesheet")
+		script(src="./libs/jquery.min.js")
+		script(src="./libs/bootstrap.min.js")
+		script(src='./libs/angular.min.js')
+
+	body
+		#ad-carousel.carousel.slide(data-ride='carousel')
+			ol.carousel-indicators
+				li.active(data-target='#ad-carousel', data-slide-to='0')
+				li(data-target='#ad-carousel', data-slide-to='1')
+				li(data-target='#ad-carousel', data-slide-to='2')
+				li(data-target='#ad-carousel', data-slide-to='3')
+				li(data-target='#ad-carousel', data-slide-to='4')
+			.carousel-inner
+				.item.active
+					img(src='images/01.jpg', alt='1 slide')
+					.container
+						.carousel-caption
+							h1 UofT Hackathon IV
+							p
+								img#barcode(src='', alt='')
+				.item
+					img(src='images/02.jpg', alt='2 slide')
+					.container
+						.carousel-caption
+							h1 We are team Deeper
+							p
+								img#barcode(src='', alt='')
+				.item
+					img(src='images/03.jpg', alt='3 slide')
+					.container
+						.carousel-caption
+							h1 From UofT & UofW - Engineering & CS
+							p
+								img#barcode(src='', alt='')
+				.item
+					img(src='images/04.jpg', alt='4 slide')
+					.container
+						.carousel-caption
+							h1 Image Classification
+							p
+								img#barcode(src='', alt='')
+				.item
+					img(src='images/05.jpg', alt='5 slide')
+					.container
+						.carousel-caption
+							h1 Machine Learning
+							p
+								img#barcode(src='', alt='')
+			a.left.carousel-control(href='#ad-carousel', data-slide='prev')
+				span.glyphicon.glyphicon-chevron-left
+			a.right.carousel-control(href='#ad-carousel', data-slide='next')
+				span.glyphicon.glyphicon-chevron-right
+		.container
+			.row
+			.row
+			.row
+				.col-md-4
+					if pic1
+						h1  #{name1}
+						#core
+							img(id= 'image1', src='./uploads/#{source1}', alt='#{name1}', style='position:relative;width:350px;height:350px;')
+					else
+
+						img(src='./default/default.jpg', alt='Default Picture', style='width:350px;height:350px;')
+				.col-md-4
+					if pic2
+						h1  #{name2}
+						#core
+							img(id= 'image2', src='./uploads/#{source2}', alt='#{name2}', style='position:relative;width:350px;height:350px;')
+					else
+
+						img(src='./default/default.jpg', alt='Default Picture', style='width:350px;height:350px;')
+				.col-md-4 
+					if pic3
+						h1  #{name3}
+						#core
+							img(id= 'image3', src='./uploads/#{source3}', alt='#{name3}', style='position:relative;width:350px;height:350px;')
+					else
+
+						img(src='./default/default.jpg', alt='Default Picture', style='width:350px;height:350px;') 
+			.row
+				form(action='/upload', enctype='multipart/form-data', method='post')
+					br
+					br
+					.col-md-4
+						.fileUpload.btn.btn-success
+							input(multiple='multiple', name='upload1', type='file')
+					.col-md-4
+						.fileUpload.btn.btn-success
+							input(multiple='multiple', name='upload2', type='file')
+					.col-md-4
+						.fileUpload.btn.btn-success
+							input(multiple='multiple', name='upload3', type='file')
+					br
+					br
+					br
+					button.btn.btn-primary(type="submit", class = 'custom') Upload
+		br
+		br
+		br
+		br
+		.container
+			.row
+				.col-md-4
+					if pic111
+						h1  #{name111}
+						#core
+							img(id= 'image111', src='./uploads/#{source111}', alt='#{name111}', style='position:relative;width:350px;height:350px;')
+					else
+
+						img(src='./default/default.jpg', alt='Default Picture', style='width:350px;height:350px;')
+				.col-md-4
+					if pic222
+						h1  #{name222}
+						#core
+							img(id= 'image222', src='./uploads/#{source222}', alt='#{name222}', style='position:relative;width:350px;height:350px;')
+					else
+
+						img(src='./default/default.jpg', alt='Default Picture', style='width:350px;height:350px;')
+				.col-md-4 
+					if pic333
+						h1  #{name333}
+						#core
+							img(id= 'image333', src='./uploads/#{source333}', alt='#{name333}', style='position:relative;width:350px;height:350px;')
+					else
+
+						img(src='./default/default.jpg', alt='Default Picture', style='width:350px;height:350px;') 
+			.row
+				form(action='/upload2', enctype='multipart/form-data', method='post')
+					br
+					br
+					.col-md-4
+						.fileUpload.btn.btn-success
+							input(multiple='multiple', name='upload1', type='file')
+					.col-md-4
+						.fileUpload.btn.btn-success
+							input(multiple='multiple', name='upload2', type='file')
+					.col-md-4
+						.fileUpload.btn.btn-success
+							input(multiple='multiple', name='upload3', type='file')
+					br
+					br
+					br
+					button.btn.btn-primary(type="submit", class = 'custom') Upload

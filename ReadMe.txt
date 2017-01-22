@@ -1,7 +1,7 @@
-1. Unzip the folder
+1. clone the code to your local
 2. Open the terminal
 3. ‘cd’ to the directory of project1
-4. Run the following commands: 
+4. Run the following commands:
 
 $ npm install
 $ node project1.js

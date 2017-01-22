@@ -35,6 +35,22 @@ app.get('/result', function(req, res) {
     cap3: caption3
   });
 });
+
+app.get('/try', function(req, res) {
+  res.render('try', {
+    pic1: true,
+    pic2: true,
+    pic3: true,
+    name: fieldTitle,
+    source1: globalFileName1,
+    source2: globalFileName2,
+    source3: globalFileName3,
+    cap1: caption1,
+    cap2: caption2,
+    cap3: caption3
+  });
+});
+
 app.post('/upload', function(req, res) {
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
