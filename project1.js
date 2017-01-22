@@ -5,6 +5,7 @@ var express = require("express"),
   fs = require('fs-extra'),
   qt = require('quickthumb');
 
+var myJSON = require("JSON");
 var open = require('open')
 
 // Use quickthumb
@@ -106,9 +107,18 @@ function updateDir() {
     timeout: 3000000,
     followRedirect: true,
     maxRedirects: 10
-  }, function(error, body) {
-    console.log(body);
-    console.log("bla");
+  }, function(error, response) {
+    console.log('RESPONSE.BODY IS      .....:')
+    baba = JSON.parse(JSON.stringify(response.body))
+    console.log(baba)
+    baba = baba.replace('[', '')
+    console.log(baba)
+    baba = baba.replace(']', '')
+    console.log(baba)
+    baba = baba.replace(/"/g, '')
+    console.log(baba)
+    after = baba.split(",")
+    console.log(after) 
     open("http://localhost:8080/result")
   });
 // request object executes at end of function
