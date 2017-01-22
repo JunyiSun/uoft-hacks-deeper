@@ -6,4 +6,6 @@
 $ npm install
 $ node project1.js
 
+$ python api.py
+
 5. Then on your web browser, visit : http://localhost:8080/
