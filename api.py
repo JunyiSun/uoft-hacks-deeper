@@ -27,6 +27,8 @@ import json
 import logging
 import datetime
 import shutil
+import subprocess
+import re
 
 IMAGE_DIR = '/Users/joeybose/Desktop/hackathon/images'
 
@@ -54,6 +56,7 @@ class Image(Resource):
 		print 'assigned model'
 		self.w2v_model = w2v_model
 		print 'assigned w2v_model'
+
 	def get(self, todo_id):
 	    abort_if_todo_doesnt_exist(todo_id)
 	    return IMAGES[todo_id]
@@ -69,18 +72,35 @@ class Image(Resource):
 		args = parser.parse_args()
 		task = args['task']
 		print task
+		self.get_captions(task)
 		#results = self.cnn_predict(task, model)
 		results = self.cnn_predict(task, self.model)
 		#results = self.cnn_predict(task, Image.model)
 		print 'predicted'
-		#query = self.w2v_predict(results, w2v_model)
 		query = self.w2v_predict(results, self.w2v_model)
-		#query = self.w2v_predict(results, Image.w2v_model)
+		#query = self.w2v_math(results, self.w2v_model)
 		print 'predicted'
 		self.get_images(query)
 		print 'getted'
 		IMAGES[todo_id] = query
 		return useless, 201
+
+	def get_captions(self,folder):
+		p = subprocess.Popen(["th", "/Users/joeybose/Desktop/hackathon/neuraltalk2/eval.lua", "-model", 
+					"/Users/joeybose/Desktop/hackathon/neuraltalk2/model_cpu.t7",
+					"-image_folder", folder, "-num_images", "3"], stdout=subprocess.PIPE)
+		output, err = p.communicate()
+		lines = output.splitlines()
+		captions = []
+		for line in lines:
+			try:
+				caption = line.split(':')
+				if re.search(r'\d', caption[0]):
+					result = caption[1].strip('\t')
+					captions.append(result)
+			except:
+				print("Error")
+		print  captions
 
 	def get_soup(self, url,header):
 	    return BeautifulSoup(urllib2.urlopen(urllib2.Request(url,headers=header)),'html.parser')
@@ -99,6 +119,8 @@ class Image(Resource):
 
 	def get_images(self, query):
 		image_type="Action"
+		print query
+		pdb.set_trace()
 		query= query.split()
 		query='+'.join(query)
 		url="https://www.google.co.in/search?q="+query+"&source=lnms&tbm=isch"
@@ -177,7 +199,7 @@ class Image(Resource):
 	def w2v_math(self, words,w2v_model):
 		print words
 		pdb.set_trace()
-                answer = w2v_model.most_similar(positive=[words[0], words[1]], negative=[words[2]])
+                answer = w2v_model.most_similar(positive=[words[0], words[1]], negative=[words[2]])[0][0]
                 return answer
 
 
