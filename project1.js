@@ -82,7 +82,7 @@ function updateDir() {
   var request = require('request');
 
   request({
-    uri: "http://localhost:5000/images/input?task=" + "/upload",
+    uri: "http://localhost:5000/images/input?task=" + "uploads",
     method: "PUT",
     timeout: 10000,
     followRedirect: true,

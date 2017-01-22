@@ -7,6 +7,7 @@ html
     script(src="./adjustment.js")
     script(src='./libs/angular.min.js')
     
+    
   body
     .container
       .row
@@ -45,4 +46,8 @@ html
           input(multiple='multiple', name='upload3', type='file')
           br
           input(type='submit', value='Upload')
-        
+      .row
+        h1  Result Picture 
+          #core
+          img(id= 'result', src='./results/result.jpg', alt='#{result}', style='position:relative;width:300px;height:300px;')
+         
