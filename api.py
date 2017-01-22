@@ -46,7 +46,14 @@ def abort_if_todo_doesnt_exist(todo_id):
 parser = reqparse.RequestParser()
 parser.add_argument('task')
 
+
 class Image(Resource):
+	def __init__(self, model, w2v_model):
+		print ' in constructor'
+		self.model = model
+		print 'assigned model'
+		self.w2v_model = w2v_model
+		print 'assigned w2v_model'
 	def get(self, todo_id):
 	    abort_if_todo_doesnt_exist(todo_id)
 	    return IMAGES[todo_id]
@@ -62,14 +69,13 @@ class Image(Resource):
 		args = parser.parse_args()
 		task = args['task']
 		print task
-		print "Starting"
-		model = self.load_cnn()
-		print 'loaded'
-		results = self.cnn_predict(task,model)
+		#results = self.cnn_predict(task, model)
+		results = self.cnn_predict(task, self.model)
+		#results = self.cnn_predict(task, Image.model)
 		print 'predicted'
-		w2v_model = self.load_w2v()
-		print 'loaded'
-		query = self.w2v_math(results,w2v_model)
+		#query = self.w2v_predict(results, w2v_model)
+		query = self.w2v_predict(results, self.w2v_model)
+		#query = self.w2v_predict(results, Image.w2v_model)
 		print 'predicted'
 		self.get_images(query)
 		print 'getted'
@@ -146,14 +152,8 @@ class Image(Resource):
 				im_path = folder + '/' + im
 				img = image.load_img(im_path,target_size=(299,299))
 				x = image.img_to_array(img)
-				print 'x is'
-				print x
 				x = np.expand_dims(x, axis=0)
-				print 'x is'
-				print x
 				x = preprocess_input(x)
-				print 'x is'
-				print x
 				preds = model.predict(x)
 				# decode the results into a list of tuples (class, description, probability)
 				# (one such list for each sample in the batch)
@@ -191,12 +191,25 @@ class Home(Resource):
     def get(self):        
         return IMAGES
 
+
 ##
 ## Actually setup the Api resource routing here
 ##
-api.add_resource(ImageList, '/images')
-api.add_resource(Image, '/images/<todo_id>')
-api.add_resource(Home, '/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	print 'begin loading model'
+	my_model = InceptionV3(weights='imagenet')
+
+	print 'begin loading 2nd model'
+	my_w2v_model = Word2Vec.load("wiki_model/wiki.en.word2vec.model")
+	print 'end loading models'
+
+	api.add_resource(ImageList, '/images')
+	#api.add_resource(Image, '/images/<todo_id>')
+	print 'Adding model resources'
+	api.add_resource(Image, '/images/<todo_id>', resource_class_kwargs={'model': my_model, 'w2v_model':my_w2v_model})
+	api.add_resource(Home, '/')
+
+	print "before run app"	
+	app.run(debug=False)
+	print "after run app"
