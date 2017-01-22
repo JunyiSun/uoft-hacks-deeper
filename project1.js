@@ -187,7 +187,7 @@ app.post('/upload2', function(req, res) {
     var file_name1 = 'input222.jpg';
     var file_name2 = 'input333.jpg';
     /* Location where we want to copy the uploaded file */
-    var new_location = 'uploads/';
+    var new_location = 'uploads2/';
 
     fs.copy(temp_path0, new_location + file_name0, function(err) {
       if (err) {
@@ -221,26 +221,12 @@ function updateDir2() {
   var request = require('request');
   // create a request object
   request({
-    uri: "http://localhost:5000/images/input?task=" + "uploads",
+    uri: "http://localhost:5000/images/input?task=" + "uploads2" + "&typee=3",
     method: "PUT",
     timeout: 3000000,
     followRedirect: true,
     maxRedirects: 10
   }, function(error, response) {
-    console.log('RESPONSE.BODY IS      .....:')
-    // baba = JSON.parse(JSON.stringify(response.body))
-    // console.log(baba)
-    // baba = baba.replace('[', '')
-    // console.log(baba)
-    // baba = baba.replace(']', '')
-    // console.log(baba)
-    // baba = baba.replace(/"/g, '')
-    // console.log(baba)
-    // after = baba.split(",")
-    // caption1 = after[0]
-    // caption2 = after[1]
-    // caption3 = after[2]
-    // console.log(after)
     open("http://localhost:8080/wordvect")
   });
 // request object executes at end of function

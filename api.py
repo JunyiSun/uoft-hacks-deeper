@@ -47,6 +47,7 @@ def abort_if_todo_doesnt_exist(todo_id):
 
 parser = reqparse.RequestParser()
 parser.add_argument('task')
+parser.add_argument('typee')
 
 
 class Image(Resource):
@@ -71,27 +72,47 @@ class Image(Resource):
 
 		print "BeforeParseArgs"
 		args = parser.parse_args()
+		print "ARGS IS"
+		print args
 		task = args['task']
 		print task
-		captions = self.get_captions(task)
-		print captions
-		#output = {'image1': captions[0], 'image2': captions[1], 'image3': captions[2]}
-		#jsonOutput = json.dumps(output)
-		#print jsonOutput
-		listOutput = [captions[0], captions[1], captions[2]]
-		#return listOutput
-		results = self.cnn_predict(task, self.model)
-		#results = self.cnn_predict(task, model)
-		#results = self.cnn_predict(task, Image.model)
-		print 'predicted'
-		query = self.w2v_predict(results, self.w2v_model)
-		#query = self.w2v_math(results, self.w2v_model)
-		print 'predicted'
-		self.get_images(query)
-		print 'getted'
-		IMAGES[todo_id] = query
-		return listOutput
-		#return output, 201
+		typee = args['typee']
+		if int(float(typee))==2:
+			print 'In Captioning'
+			captions = self.get_captions(task)
+			print captions
+			#output = {'image1': captions[0], 'image2': captions[1], 'image3': captions[2]}
+			#jsonOutput = json.dumps(output)
+			#print jsonOutput
+			listOutput = [captions[0], captions[1], captions[2]]
+			#return listOutput
+			results = self.cnn_predict(task, self.model)
+			#results = self.cnn_predict(task, model)
+			#results = self.cnn_predict(task, Image.model)
+			print 'predicted'
+			query = self.w2v_predict(results, self.w2v_model)
+			#query = self.w2v_math(results, self.w2v_model)
+			print 'predicted'
+			self.get_images(query)
+			print 'getted'
+			IMAGES[todo_id] = query
+			return listOutput
+		else:
+			print 'In Mathy'
+			#captions = self.get_captions(task)
+			#print captions
+			#output = {'image1': captions[0], 'image2': captions[1], 'image3': captions[2]}
+			#jsonOutput = json.dumps(output)
+			#print jsonOutput
+			listOutput = ['none','none','none']
+			#return listOutput
+			results = self.cnn_predict(task, self.model)
+			print 'predicted'
+			query = self.w2v_math(results, self.w2v_model)
+			print 'mathed'
+			self.get_images(query)
+			IMAGES[todo_id] = query
+			return listOutput
 
 	def get_captions(self,folder):
 		p = subprocess.Popen(["th", "/Users/joeybose/Desktop/hackathon/neuraltalk2/eval.lua", "-model", 
