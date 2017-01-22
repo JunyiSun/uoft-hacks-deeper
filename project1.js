@@ -227,16 +227,16 @@ function updateDir2() {
     followRedirect: true,
     maxRedirects: 10
   }, function(error, response) {
-    console.log('RESPONSE.BODY IS      .....:')
-    baba = JSON.parse(JSON.stringify(response.body))
-    baba = baba.replace('[', '')
-    baba = baba.replace(']', '')
-    baba = baba.replace(/"/g, '')
-    after = baba.split(",")
-    caption1 = after[0]
-    caption2 = after[1]
-    caption3 = after[2]
-    console.log(after)
+    // console.log('RESPONSE.BODY IS      .....:')
+    // baba = JSON.parse(JSON.stringify(response.body))
+    // baba = baba.replace('[', '')
+    // baba = baba.replace(']', '')
+    // baba = baba.replace(/"/g, '')
+    // after = baba.split(",")
+    // caption1 = after[0]
+    // caption2 = after[1]
+    // caption3 = after[2]
+    // console.log(after)
     open("http://localhost:8080/wordvect")
   });
 // request object executes at end of function

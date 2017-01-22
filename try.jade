@@ -9,36 +9,35 @@ html
 
 
 	body
-		.container
-			.row
+		.panel.panel-primary
+			.panel-heading
+				h3 Input Picutures
+			.panel-body
+				.col-md-3
+					.thumbnail
+						img(src="./uploads2/#{source1}",  style="width:250px;height:250px;")
 				.col-md-2
-					if pic1
-						h5  #{cap1}
-						#core
-							img(id= 'image111', src='./uploads2/#{source1}', alt='#{name111}', style='position:relative;width:180px;height:200px;')
-					else
-						img(src='./default/default.jpg', alt='Default Picture', style='width:200px;height:200px;')
-				.col-md-1
-					h1 +
+					.thumbnail
+						img(src="./default/plus.jpg",  style="width:250px;height:250px;")
 				.col-md-2
-					if pic2
-						h5  #{cap2}
-						#core
-							img(id= 'image222', src='./uploads2/#{source2}', alt='#{name222}', style='position:relative;width:180px;height:200px;')
-					else
-						img(src='./default/default.jpg', alt='Default Picture', style='width:200px;height:200px;')
-				.col-md-1			
-					h1 -
+					.thumbnail
+						img(src="./uploads2/#{source2}",  style="width:250px;height:250px;")
 				.col-md-2
-					if pic3
-						h5  #{cap3}
-						#core
-							img(id= 'image333', src='./uploads2/#{source3}', alt='#{name333}', style='position:relative;width:180px;height:200px;')
-					else    
-						img(src='./default/default.jpg', alt='Default Picture', style='width:200px;height:200px;') 
-				.col-md-1
-					h1 =
+					.thumbnail
+						img(src="./default/minus.jpg",  style="width:250px;height:250px;")
+				.col-md-3
+					.thumbnail
+						img(src="./uploads2/#{source3}",  style="width:250px;height:250px;")
+		.panel.panel-primary
+			.panel-heading
+				h3 Output Picutures
+			.panel-body
 				.col-md-2
-					#core
-					img(id= 'result', src='./results/result.jpg', alt='#{result}', style='position:relative;width:180px;height:200px;')
-					h3  Result Picture 
+				.col-md-2
+				.col-md-2
+					.thumbnail
+						img(src="./default/equal.jpg",  style="width:250px;height:250px;")
+				.col-md-2
+					.thumbnail
+						img(src='./results/result.jpg',  style="width:250px;height:250px;")
+				.col-md-2
