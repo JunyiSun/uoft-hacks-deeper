@@ -1,0 +1,23 @@
+{
+  "name": "imageprocessor",
+  "version": "1.0.0",
+  "description": "this is an api that can upload an image and edit it",
+  "main": "project1.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "formidable": "^1.0.17",
+    "fs-extra": "^0.26.5",
+    "jade": "^1.11.0",
+    "quickthumb": "^0.0.12",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Katherine Junyi Sun",
+  "license": "ISC"
+}
