@@ -30,7 +30,7 @@ def logElapsedTime(elapsedTime, message):
     hours, remainder = divmod(elapsedTime.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     totalDays = elapsedTime.days
-    logging.info(str(message) + ': Days: ' + str(totalDays) +  " hours: " + str(hours) + ' minutes: ' + str(minutes) +  ' seconds: ' + str(seconds))
+    print str(message) + ': Days: ' + str(totalDays) +  " hours: " + str(hours) + ' minutes: ' + str(minutes) +  ' seconds: ' + str(seconds)
 
 def logTimeInfo(startTime, endTime, message):
     ''' Logs information about elapsedTime '''
@@ -71,14 +71,7 @@ def get_images(query):
 
 		cntr = len([i for i in os.listdir(DIR) if image_type in i]) + 1
 		print cntr
-		if len(Type)==0:
-		    #f = open(os.path.join(DIR , image_type + "_"+ str(cntr)+".jpg"), 'wb')
-            f = open(os.path.join(DIR , "result.jpg"), 'wb')
-		else :
-		    #f = open(os.path.join(DIR , image_type + "_"+ str(cntr)+"."+Type), 'wb')
-            f = open(os.path.join(DIR , "result.jpg"), 'wb')
-
-
+            	f = open(os.path.join(DIR , "result.jpg"), 'wb')
 		f.write(raw_img)
 		f.close()
 		counter = counter + 1
@@ -100,8 +93,14 @@ def cnn_predict(folder):
 			im_path = folder + '/' + im
 			img = image.load_img(im_path,target_size=(299,299))
 			x = image.img_to_array(img)
+			print 'x is'
+			print x
 			x = np.expand_dims(x, axis=0)
+			print 'x is'
+			print x
 			x = preprocess_input(x)
+			print 'x is'
+			print x
 			preds = model.predict(x)
 			# decode the results into a list of tuples (class, description, probability)
 			# (one such list for each sample in the batch)
@@ -123,18 +122,28 @@ def w2v_predict(words):
 	return answer
 
 if __name__ == "__main__":
-	logging.basicConfig(filename='output.log', level=logging.DEBUG)
 	startTime = datetime.datetime.now()
+	print "1"
 	model = load_cnn()
+	print "1"
 	loadCnnTime = datetime.datetime.now()
+	print "1"
 	logTimeInfo(startTime,loadCnnTime,"loadCnnTime")
+	print "1"
 	results = cnn_predict(IMAGE_DIR)
+	print "1"
 	predictCnnTime = datetime.datetime.now()
+	print "1"
 	logTimeInfo(loadCnnTime,predictCnnTime,"predictCnnTime")
+	print "1"
 	w2v_model = load_w2v()
+	print "1"
 	loadW2vTime = datetime.datetime.now()
+	print "1"
 	logTimeInfo(predictCnnTime,loadW2vTime,"loadW2vTime")
+	print "1"
 	query = w2v_predict(results)
+	print "1"
 	predictW2vTime = datetime.datetime.now()
 	logTimeInfo(loadW2vTime,predictW2vTime,"predictW2vTime")
 	get_images(query)

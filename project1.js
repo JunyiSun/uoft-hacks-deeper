@@ -5,6 +5,7 @@ var express = require("express"),
   fs = require('fs-extra'),
   qt = require('quickthumb');
 
+var open = require('open')
 
 // Use quickthumb
 app.use(qt.static(__dirname + '/'));
@@ -12,17 +13,37 @@ app.use(qt.static(__dirname + '/'));
 app.set('views', './'); //views files
 app.set('view engine', 'jade'); //set templete
 
+globalFileName1 = ""
+globalFileName2 = ""
+globalFileName3 = ""
+fieldTitle = ""
+
+app.get('/result', function(req, res) {
+    res.render('uploadpage', {
+      pic1: true,
+      pic2: true,
+      pic3: true,
+      name: fieldTitle,
+      source1: globalFileName1,
+      source2: globalFileName2,
+      source3: globalFileName3
+    });
+});
 app.post('/upload', function(req, res) {
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
+    fieldTitle = fields.title
     if (files.upload1.name) {
       var pic11 = true;
+      globalFileName1 = files.upload1.name;
     }
     if (files.upload2.name) {
       var pic22 = true;
+      globalFileName2 = files.upload2.name;
     }
     if (files.upload3.name) {
       var pic33 = true;
+      globalFileName3 = files.upload3.name;
     }
     res.render('uploadpage', {
       pic1: pic11,
@@ -54,9 +75,7 @@ app.post('/upload', function(req, res) {
       } else {
         console.log("0success!" + file_name0)
         // Handling get request
-        console.log("Before put")
-
-        updateDir();
+        console.log("Before put request sent")
       }
     });
     fs.copy(temp_path1, new_location + file_name1, function(err) {
@@ -73,23 +92,26 @@ app.post('/upload', function(req, res) {
         console.log("2success!" + file_name2)
       }
     });
-
-
+    updateDir();
+    // request object executes here.
   });
 });
 
 function updateDir() {
   var request = require('request');
-
+  // create a request object
   request({
     uri: "http://localhost:5000/images/input?task=" + "uploads",
     method: "PUT",
-    timeout: 10000,
+    timeout: 3000000,
     followRedirect: true,
     maxRedirects: 10
-  }, function(error, response, body) {
+  }, function(error, body) {
     console.log(body);
+    console.log("bla");
+    open("http://localhost:8080/result")
   });
+  // request object executes at end of function 
 }
 
 // Show the upload form
