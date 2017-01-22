@@ -17,6 +17,9 @@ globalFileName1 = ""
 globalFileName2 = ""
 globalFileName3 = ""
 fieldTitle = ""
+caption1 = "AI caption1";
+caption2 = "AI caption2";
+caption3 = "AI caption3";
 
 app.get('/result', function(req, res) {
   res.render('resultpage', {
@@ -26,7 +29,10 @@ app.get('/result', function(req, res) {
     name: fieldTitle,
     source1: globalFileName1,
     source2: globalFileName2,
-    source3: globalFileName3
+    source3: globalFileName3,
+    cap1: caption1,
+    cap2: caption2,
+    cap3: caption3
   });
 });
 app.post('/upload', function(req, res) {
@@ -107,6 +113,7 @@ function updateDir() {
     followRedirect: true,
     maxRedirects: 10
   }, function(error, body) {
+    console.log("before body")
     console.log(body);
     console.log("bla");
     open("http://localhost:8080/result")

@@ -18,7 +18,7 @@ html
         li(data-target='#ad-carousel', data-slide-to='4')
       .carousel-inner
         .item.active
-          img(src='images/together.JPG', alt='1 slide')
+          img(src='images/01.jpg', alt='1 slide')
           .container
             .carousel-caption
               h1 UofT Hackathon IV
@@ -32,21 +32,21 @@ html
               p
                 img#barcode(src='', alt='')
         .item
-          img(src='images/04.jpg', alt='3 slide')
+          img(src='images/03.jpg', alt='3 slide')
           .container
             .carousel-caption
               h1 From UofT & UofW - Engineering & CS
               p
                 img#barcode(src='', alt='')
         .item
-          img(src='images/10.jpg', alt='4 slide')
+          img(src='images/04.jpg', alt='4 slide')
           .container
             .carousel-caption
               h1 Image Recognition
               p
                 img#barcode(src='', alt='')
         .item
-          img(src='images/12.jpg', alt='5 slide')
+          img(src='images/05.jpg', alt='5 slide')
           .container
             .carousel-caption
               h1 Machine Learning
@@ -58,7 +58,7 @@ html
         span.glyphicon.glyphicon-chevron-right
     .container
       .row
-        .col-md-3
+        .col-md-4
           if pic1
             h1  #{name1}
             #core
@@ -66,7 +66,7 @@ html
           else
             
             img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
-        .col-md-3
+        .col-md-4
           if pic2
             h1  #{name2}
             #core
@@ -74,7 +74,7 @@ html
           else
             
             img(src='./default/default.jpg', alt='Default Picture', style='width:300px;height:300px;')
-        .col-md-3 
+        .col-md-4 
           if pic3
             h1  #{name3}
             #core
@@ -86,9 +86,18 @@ html
         form(action='/upload', enctype='multipart/form-data', method='post')
           br
           br
-          input(multiple='multiple', name='upload1', type='file')
-          input(multiple='multiple', name='upload2', type='file')
-          input(multiple='multiple', name='upload3', type='file')
+          .col-md-4
+            .fileUpload.btn.btn-success
+              input(multiple='multiple', name='upload1', type='file')
+          .col-md-4
+            .fileUpload.btn.btn-success
+              input(multiple='multiple', name='upload2', type='file')
+          .col-md-4
+            .fileUpload.btn.btn-success
+              input(multiple='multiple', name='upload3', type='file')
           br
-          input(type='submit', value='Upload')
+          br
+          br
+          button.btn.btn-primary(type="submit", class = 'custom') Upload
+          //- input(type='submit', value='Upload')
          
