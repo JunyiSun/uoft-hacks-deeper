@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import reqparse, abort, Api, Resource
 import imagenet_classification
 import sys
+import random
 import os
 import datetime
 import simplejson as json
@@ -136,6 +137,7 @@ class Image(Resource):
 
 	def get_images(self, query):
 		image_type="Action"
+		rand = random.randint(1,4)
 		print query
 		query= query.split()
 		query='+'.join(query)
@@ -155,22 +157,24 @@ class Image(Resource):
 			    os.mkdir(DIR)
 		###print images
 		counter = 0
+		
 		for i , (img , Type) in enumerate( ActualImages):
-		    if counter > 0 :
-			break
-		    try:
-			req = urllib2.Request(img, headers={'User-Agent' : header})
-			raw_img = urllib2.urlopen(req).read()
+		    if i == rand :
+			    if counter > 0 :
+				break
+			    try:
+				req = urllib2.Request(img, headers={'User-Agent' : header})
+				raw_img = urllib2.urlopen(req).read()
 
-			cntr = len([i for i in os.listdir(DIR) if image_type in i]) + 1
-			print cntr
-			f = open(os.path.join(DIR , "result.jpg"), 'wb')
-			f.write(raw_img)
-			f.close()
-			counter = counter + 1
-		    except Exception as e:
-			print "could not load : "+img
-			print e
+				cntr = len([i for i in os.listdir(DIR) if image_type in i]) + 1
+				print cntr
+				f = open(os.path.join(DIR , "result.jpg"), 'wb')
+				f.write(raw_img)
+				f.close()
+				counter = counter + 1
+			    except Exception as e:
+				print "could not load : "+img
+				print e
 
 
 	def load_cnn(self):
